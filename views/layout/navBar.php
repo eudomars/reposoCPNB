@@ -12,9 +12,42 @@
 
         <ul class="navbar-nav mr-auto">
 
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?= SERVERURL; ?>registrar/"> <i class="icon-pencil"></i> Registrar</a>
-            </li> -->
+        
+
+
+            <li class="nav-item">
+                <!-- <a class="nav-link" href="<?= SERVERURL; ?>registrar/"> <i class="icon-pencil"></i> Registrar</a> -->
+            </li>
+
+            <li class="nav-item">
+            <a class="nav-link" href="<?= SERVERURL; ?>buscar/">
+                        <i class="icon-book"></i> Buscar trabajador
+                </a>
+                <!-- <a class="nav-link" href="<?= SERVERURL; ?>registrar/"> <i class="icon-pencil"></i> Registrar</a> -->
+            </li>
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-pencil"></i> Registrar
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" href="<?= SERVERURL; ?>centroMedico/"> <span class="icon-office"></span> Centro medico </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="<?= SERVERURL; ?>users/"> <span class="icon-folder-plus"></span> Medico </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="<?= SERVERURL; ?>users/"> <span class="icon-aid-kit"></span> Tipo reposo </a>
+                
+                </div>
+
+            </li>
 
             <?php if($_SESSION['nivel'] == 1){ ?>
 
@@ -36,6 +69,9 @@
                     </div>
 
                 </li>
+                <!-- <a class="nav-link" href="<?= SERVERURL; ?>buscar/">
+                        <i class="icon-book"></i> Buscar trabajador
+                </a> -->
 
             <?php }else{ ?>
 

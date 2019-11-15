@@ -54,8 +54,8 @@ if ($vistasR == "./views/content/reporte-view.php"){
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="banner">
-                <h1 class="display-4">Sistema</h1>
-                <p class="lead"> Nombre de la empresa. </p>
+                <h1 class="display-4">Sistema de Registro de Reposo</h1>
+                <p class="lead"> CPNB-RRHH. </p>
             </div>
         
             <?php

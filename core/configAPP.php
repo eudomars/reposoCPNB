@@ -1,7 +1,7 @@
 <?php
 
 const SERVER = "localhost options='--client_encoding=UTF8'";
-const DBNAME = 'sistema';
+const DBNAME = 'reposo';
 const DBUSER = 'postgres';
 const DBPASS = '1qaz2wsx';
 const DBPORT = 5433; // Solo para base de datos PostgreSQL

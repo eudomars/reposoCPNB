@@ -132,3 +132,107 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Registrar Reposo -->
+<div class="modal fade" id="reg-reposo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Reposo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+
+                        <form id="frm-reg-reposo" autocomplete="off">
+
+                            <div class="col-md-12">
+                                <label for="frm_rol">Medico Tratante:</label>
+                                <select class="custom-select" name="medicoT" id="medicoT">
+                                    <option value="">Seleccione...</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Analista</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="frm_rol">Centro medico:</label>
+                                <select class="custom-select" name="medicoT" id="medicoT">
+                                    <option value="">Seleccione...</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Analista</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="frm_rol">Diagnostico:</label>
+                                <select class="custom-select" name="medicoT" id="medicoT">
+                                    <option value="">Seleccione...</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Analista</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="frm_rol">Tipo de reposo:</label>
+                                <select class="custom-select" name="medicoT" id="medicoT">
+                                    <option value="">Seleccione...</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Analista</option>
+                                </select>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group">
+
+                                        <label for="frm_user">Desde:</label>
+                                        <input type="date" class="form-control" name="centroM" id="centroM">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+
+                                    <div class="form-group">
+
+                                        <label for="frm_pass">Hasta: </label>
+    
+                                        <input type="date" class="form-control" name="diag" id="diag">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Observacion</span>
+  </div>
+  <textarea class="form-control" aria-label="With textarea"></textarea>
+</div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

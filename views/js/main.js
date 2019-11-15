@@ -1,7 +1,7 @@
 $(function(){
 
 	// Elementos ocultos
-	$("#my_account_save_name,#my_account_save_pass,#frmEditUser,#btn-editsave-user").hide();
+	$("#my_account_save_name,#my_account_save_pass,#frmEditUser,#btn-editsave-user, #tableTrab").hide();
 	
 	// Elementos bloqueados
 	$('#my_a_name,#my_a_pass,#my_a_pass_confirm,#my_a_pass_actual').attr('disabled', true);
@@ -445,4 +445,77 @@ function graficaHome(datosX1,datosY1,datosX2,datosY2){
 	var data = [linea1, linea2];
 
 	Plotly.newPlot('graficaLinea', data, layout,{}, {showSendToCloud: true});
+}
+
+
+// Obtener lista trabajador
+function trabBusc(){
+
+	ced = document.getElementById('trab').value;
+	// console.log(ced);
+	$.ajax({
+		type: "POST",
+		data: {cedula:ced},
+		url: "../controllers/trabajadorController.php",
+		success:function(r){
+			r = JSON.parse(r);
+			// console.log(r.cedula);
+			// $('#tableTrab').show();
+			$('#cd').html(r.cedula);
+			$('#nomb').html(r.nombres);
+			$('#jer').html(r.cargo);
+			$('#sta').html(r.estatus);
+			$('#dep').html(r.dependencia);
+			$('#nomina').html(r.nomina);
+			$('#tel').html(r.celular);
+			$('#correo').html(r.email);
+			// $('#cd').html(r.cedula);
+			//ocultamos el campo de busqueda
+			// $('#buscartrab').hide();
+		}
+	})
+	// $('#table-trab').html()({
+	// 	"destroy": true,
+	// 	"ajax":{
+	// 		"method": "GET",
+	// 		"url": "../controllers/trabController.php"
+	// 	},
+	// 	"columns":[
+	// 		{"data": "nro"},
+	// 		{"data": "cd"},
+	// 		{"data": "nomb"},
+	// 		{"data": "nomi"},
+	// 		{"data": "est"},
+	// 		{"data": "dep"},
+	// 		{"data": "fech_mov"},
+	// 		{"data": "opciones"}
+	// 	],
+	// 	"language": spanish
+	// });
+
+}
+
+// Zoom trabajador
+function zoom_trab(id_trab){
+	
+	$.get("../controllers/ajaxController.php", { zoom_trab : id_trab }, function (r){
+
+		
+		// id_trab = document.getElementById('trab').value;
+
+
+		r = JSON.parse(r);
+		console.log(r);
+		// // alert(datos);
+		$("#idtrab").html(r.id_trabajador).addClass('font-weight-bold');
+		$("#ced").html(r.cedula).addClass('font-weight-bold');
+		$("#nomb").html(r.nombres).addClass('font-weight-bold');
+		$("#nomina").html(r.trabajador_nomina).addClass('font-weight-bold');
+		$("#sta").html(r.estatus).addClass('font-weight-bold');
+		$("#dep").html(r.dependencia).addClass('font-weight-bold');
+		$("#fechUlt").html(r.fecha_ultimo_movimiento).addClass('font-weight-bold');
+	
+
+	});
+
 }

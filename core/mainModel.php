@@ -87,3 +87,27 @@
         }
 
     }
+
+    require_once 'configSIG.php';
+
+    class sigModel{
+
+        protected function conectarSige(){
+
+            try {
+                
+                $conexions = new PDO(SGBDS,DBUSERS,DBPASSS);
+                return $conexions;
+                echo "Conectado";
+            } catch (PDOException $e) {
+                
+                die($e->getMessage());
+                
+            }finally{
+                
+                $conexions = NULL;
+                
+            }
+
+        }
+    }
