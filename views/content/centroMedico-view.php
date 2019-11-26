@@ -47,11 +47,12 @@
                     </div>
                 </div>
 
+
                 <div class="col-sm-2">
                     <div class="form-group">
                     <div class="col-lg-12">
                                 <label>Telefono:</label><br>
-                                <input type="text" name="telefCent" id="telefCent" maxlength="11">
+                                <input type="text" name="telefCent" id="telefCent" maxlength="11" class="form-control">
                             </div>
                     </div>
                 </div>
@@ -62,6 +63,15 @@
                                 <label>Rif:</label><br>
                                 <input type="text" name="rifCentroM" id="rifCentroM" class="form-control" >
                             </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>Direccion:</label><br>
+                               <textarea name="direcCM" id="direcCM" cols="40" rows="5" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
 
