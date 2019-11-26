@@ -39,7 +39,7 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" href="<?= SERVERURL; ?>users/"> <span class="icon-folder-plus"></span> Medico </a>
+                    <a class="dropdown-item" href="<?= SERVERURL; ?>medico/"> <span class="icon-folder-plus"></span> Medico </a>
 
                     <div class="dropdown-divider"></div>
 
