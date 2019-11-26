@@ -4,7 +4,7 @@
 
         protected function obtener_vistas_modelo($vistas){
 
-            $listaBlanca = ["home", "users", "myaccount", "reporte", "buscar", "centroMedico"];
+            $listaBlanca = ["home", "users", "myaccount", "reporte", "buscar", "centroMedico","medico"];
 
             if(in_array($vistas,$listaBlanca)){
 
