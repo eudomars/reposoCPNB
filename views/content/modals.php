@@ -219,7 +219,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text">Observacion</span>
   </div>
-  <textarea class="form-control" aria-label="With textarea"></textarea>
+  <textarea class="form-control" aria-label="With textarea" name="observ"></textarea>
 </div>
 
                             <div class="modal-footer">
