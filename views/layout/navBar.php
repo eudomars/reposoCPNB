@@ -49,6 +49,29 @@
 
             </li>
 
+            <li class="nav-item dropdown">
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="icon-file-pdf"></i> Generar Reportes
+</a>
+
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+    <a class="dropdown-item" href="<?= SERVERURL; ?>centroMedico/"> <span class="icon-office"></span> Centro medico </a>
+
+    <div class="dropdown-divider"></div>
+
+    <a class="dropdown-item" href="<?= SERVERURL; ?>medico/"> <span class="icon-folder-plus"></span> Medico </a>
+
+    <div class="dropdown-divider"></div>
+
+    <a class="dropdown-item" href="<?= SERVERURL; ?>users/"> <span class="icon-aid-kit"></span> Tipo reposo </a>
+
+</div>
+
+</li>
+
             <?php if($_SESSION['nivel'] == 1){ ?>
 
                 <li class="nav-item dropdown">
