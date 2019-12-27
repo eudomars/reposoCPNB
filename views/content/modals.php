@@ -190,6 +190,16 @@
                                 </select>
                             </div>
 
+                            <div class="col-md-12">
+                                <br>
+                                <label for="frm_rol">Capture de reposo:</label>
+                                <div class="form-group"> 
+                                <input type="file" name="archivoRep" id="archivoRep">
+
+                                </div>
+                                
+                            </div>
+
 
                             <div class="row">
 
