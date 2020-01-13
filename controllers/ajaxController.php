@@ -38,6 +38,38 @@ class ajaxController extends ajaxModel{
 
     }
 
+    // Registrar centro medico
+    public function registrar_medico_controlador($cdMed,$nombMed,$credMed,$telfMed,$espec){
+
+        $cdMed = mainModel::limpiar_cadena($cdMed);
+        $nombMed = mainModel::limpiar_cadena($nombMed);
+        $credMed = mainModel::limpiar_cadena($credMed);
+        $telfMed = mainModel::limpiar_cadena($telfMed);
+        $espec = mainModel::limpiar_cadena($espec);
+
+        $medico = array("cdMedico" => $cdMed, "nomApeMedic" => $nombMed, "credencialMed" => $credMed, "telefMed" => $telfMed, "especialidad" => $espec);
+
+        return ajaxModel::registrar_medico_modelo($medico);
+
+    }
+
+     // Registrar centro medico
+     public function registrar_centroMedico_controlador($estado,$municipio,$nombreCentro,$telf,$rif,$ubicacion){
+
+        $estado = mainModel::limpiar_cadena($estado);
+        $municipio = mainModel::limpiar_cadena($municipio);
+        $nombreCentro = mainModel::limpiar_cadena($nombreCentro);
+        $telf = mainModel::limpiar_cadena($telf);
+        $rif = mainModel::limpiar_cadena($rif);
+        $ubicacion = mainModel::limpiar_cadena($ubicacion);
+
+        $centroMedico = array("estado" => $estado, "municipio" => $municipio, "nombCentro" => $nombreCentro, "telf" => $telf, "rif" => $rif, "ubicacion" => $ubicacion);
+
+        return ajaxModel::registrar_centroMedico_modelo($centroMedico);
+
+    }
+
+
     // Actualizar contraseña
     public function actualizar_user_pass_controller($old_pass,$new_pass){
 
@@ -122,6 +154,39 @@ if (isset($_POST['frm_user']) && isset($_POST['frm_pass']) && isset($_POST['frm_
     }else{
         
         echo ajaxController::registrar_usuarios_controlador($_POST['frm_user'],$_POST['frm_pass'],$_POST['frm_name'],$_POST['frm_rol']);
+
+    }
+
+}
+
+
+// Captura los datos del formulario del  medico para registrarlos
+if (isset($_POST['cdMedico']) && isset($_POST['nomApeMedic']) && isset($_POST['credencialMed']) && isset($_POST['telefMed']) && isset($_POST['especialidad'])){
+
+    if (empty($_POST['cdMedico']) || empty($_POST['nomApeMedic']) || empty($_POST['credencialMed']) || empty($_POST['telefMed']) || empty($_POST['especialidad'])){
+
+        echo 2; // Formulario incompleto
+        
+    }else{
+        
+        echo ajaxController::registrar_medico_controlador($_POST['cdMedico'],$_POST['nomApeMedic'],$_POST['credencialMed'],$_POST['telefMed'],$_POST['especialidad']);
+
+    }
+
+}
+
+
+
+// Captura los datos del formulario del centro medico para registrarlos
+if (isset($_POST['estadoC']) && isset($_POST['municipioC']) && isset($_POST['centroM']) && isset($_POST['telefCent']) && isset($_POST['rifCentroM']) && isset($_POST['direcCM'])){
+
+    if (empty($_POST['estadoC']) || empty($_POST['municipioC']) || empty($_POST['centroM']) || empty($_POST['telefCent']) || empty($_POST['rifCentroM']) || empty($_POST['direcCM'])){
+
+        echo 2; // Formulario incompleto
+        
+    }else{
+        
+        echo ajaxController::registrar_centroMedico_controlador($_POST['estadoC'],$_POST['municipioC'],$_POST['centroM'],$_POST['telefCent'],$_POST['rifCentroM'],$_POST['direcCM']);
 
     }
 

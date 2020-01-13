@@ -81,6 +81,77 @@ class ajaxModel extends mainModel{
 
     }
 
+     // Registrar medico
+     protected function registrar_medico_modelo($datos){
+
+        session_start(['name' => 'NSW']);
+
+        $sql = "INSERT INTO medico(cedula_medico,nombre_medico,credencial_medico,telef_medico,especialidad,usuario_registro,fecha_registro)  VALUES(
+            :cdMedico, :nomb, :credMedico, :telef, :espec, :user, :fecha
+          )";
+
+        $result = mainModel::conectar()->prepare($sql);
+        // mb_strtoupper($str)
+        
+        $result->bindValue(":cdMedico", $datos['cdMedico'], PDO::PARAM_INT);
+        $result->bindValue(":nomb",ucwords($datos['nomApeMedic']), PDO::PARAM_STR);
+
+        $result->bindValue(":telef", $datos['telefMed'], PDO::PARAM_STR);
+        $result->bindValue(":credMedico", $datos['credencialMed'], PDO::PARAM_STR);
+
+        $result->bindValue(":espec",($datos['especialidad']), PDO::PARAM_INT);
+
+        
+        $result->bindValue(":user", $_SESSION['id_user'], PDO::PARAM_INT);
+        $result->bindValue(":fecha", date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        
+
+        $result->execute();
+
+        $result_boolean = ($result->rowCount() > 0);
+
+        unset($result);
+        unset($conexion);
+
+        return $result_boolean;
+
+    }
+
+
+     // Registrar centro medico
+     protected function registrar_centroMedico_modelo($datos){
+
+        session_start(['name' => 'NSW']);
+
+        $sql = "INSERT INTO centro_medico(id_estado,id_municipio,centro_medico,telef_centro_medico,rif_centro_medico,direccion_centro_medico,usuario_registro,fecha_registro)  VALUES(
+            :estado, :municipio, :centro_medico, :telef, :rif, :direcc, :user,:fecha
+          )";
+
+        $result = mainModel::conectar()->prepare($sql);
+        // mb_strtoupper($str)
+        
+        $result->bindValue(":estado", $datos['estado'], PDO::PARAM_INT);
+        $result->bindValue(":municipio", $datos['municipio'], PDO::PARAM_INT);
+
+        $result->bindValue(":centro_medico", mb_strtoupper($datos['nombCentro']), PDO::PARAM_STR);
+        $result->bindValue(":direcc",ucfirst($datos['ubicacion']), PDO::PARAM_STR);
+        $result->bindValue(":telef", $datos['telf'], PDO::PARAM_STR);
+        $result->bindValue(":rif", mb_strtoupper($datos['rif']), PDO::PARAM_STR);
+        $result->bindValue(":user", $_SESSION['id_user'], PDO::PARAM_INT);
+        $result->bindValue(":fecha", date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        
+
+        $result->execute();
+
+        $result_boolean = ($result->rowCount() > 0);
+
+        unset($result);
+        unset($conexion);
+
+        return $result_boolean;
+
+    }
+
     // Actualizar contraseña
     protected function actualizar_user_pass_model($old_pass,$new_pass){
 

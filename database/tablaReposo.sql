@@ -1,66 +1,117 @@
 reposo
 
-
-CREATE TABLE  reposo (
+CREATE TABLE  registro_reposo (
   idreposo serial,
-  trabajador_idtrabajador integer,
-  cedula integer,
-  medico_tratante_idmedico_tratante integer,
-  centro_asistencial_idcentro_asistencial integer,
-  diagnostico_iddiagnostico integer,
-  tipo_reposo_idtipo_reposo integer,
+  idtrabajador integer,
+  cedula_trabajador integer,
+  idmedico integer,
+  idcentro_medico integer,
+  iddiagnostico integer,
+  idtipo_reposo integer,
   desde DATE,
   hasta DATE,
-  dias_repos integer,
-  observacion varying,
+  dias_reposo integer,
+  observacion text,
   usuario_registro integer,
   fecha_registro timestamp,
   usuario_modifico integer,
   fecha_modifico timestamp,
-  PRIMARY KEY (idreposo),
-  INDEX fk_reposo_diagnostico_idx (diagnostico_iddiagnostico ASC),
-  INDEX fk_reposo_tipo_reposo1_idx (tipo_reposo_idtipo_reposo ASC),
-  INDEX fk_reposo_trabajador1_idx (trabajador_idtrabajador ASC),
-  INDEX fk_reposo_medico_tratante1_idx (medico_tratante_idmedico_tratante ASC),
-  INDEX fk_reposo_centro_asistencial1_idx (centro_asistencial_idcentro_asistencial ASC),
-  UNIQUE INDEX cedula_UNIQUE (cedula ASC),
-  CONSTRAINT fk_reposo_diagnostico
-    FOREIGN KEY (diagnostico_iddiagnostico)
-    REFERENCES reposo.diagnostico (iddiagnostico)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_reposo_tipo_reposo1
-    FOREIGN KEY (tipo_reposo_idtipo_reposo)
-    REFERENCES reposo.tipo_reposo (idtipo_reposo)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_reposo_trabajador1
-    FOREIGN KEY (trabajador_idtrabajador)
-    REFERENCES reposo.trabajador (idtrabajador)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_reposo_medico_tratante1
-    FOREIGN KEY (medico_tratante_idmedico_tratante)
-    REFERENCES reposo.medico_tratante (idmedico_tratante)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_reposo_centro_asistencial1
-    FOREIGN KEY (centro_asistencial_idcentro_asistencial)
-    REFERENCES reposo.centro_asistencial (idcentro_asistencial)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-
+  PRIMARY KEY (idreposo)
+)
 
 
 
 diagnostico
 
 
-CREATE TABLE IF NOT EXISTS reposo.diagnostico (
-  iddiagnostico INT NOT,
-  diagnostico VARCHAR(45),
-  fech_reg DATE,
-  usuario_reg INT,
+CREATE TABLE IF NOT EXISTS diagnostico (
+  iddiagnostico serial,
+  diagnostico VARCHAR(100),
+  usuario_registro integer,
+  fecha_registro timestamp,
+  usuario_modifico integer,
+  fecha_modifico timestamp,
   PRIMARY KEY (iddiagnostico))
-ENGINE = InnoDB
+
+  -- medico 
+
+  CREATE TABLE medico (
+  idmedico serial,
+  cedula_medico integer,
+  nombre_medico VARCHAR(100),
+  credencial_medico VARCHAR(50),
+  telef_medico VARCHAR(30),
+  especialidad integer,
+  usuario_registro integer,
+  fecha_registro timestamp,
+  usuario_modifico integer,
+  fecha_modifico timestamp,
+  PRIMARY KEY (idmedico))
+
+  -- Registrar centro medico
+
+INSERT INTO medico(cedula_medico,credencial_medico,telef_medico,especialidad,usuario_registro,fecha_registro)  VALUES(
+  :cdMedico, :credMedico, :telef, :espec, :usuario_registro, :fecha_registro
+);
+
+  -- centro medico
+
+  CREATE TABLE centro_medico (
+  idcentro_medico serial,
+  id_estado integer NOT NULL,
+  id_municipio integer,
+  centro_medico VARCHAR(100),
+  telef_centro_medico VARCHAR(30),
+  rif_centro_medico VARCHAR(50),
+  direccion_centro_medico text,
+  usuario_registro integer,
+  fecha_registro timestamp,
+  usuario_modifico integer,
+  fecha_modifico timestamp,
+  PRIMARY KEY (idcentro_medico))
+
+-- Registrar centro medico
+
+INSERT INTO centro_medico(id_estado,id_municipio,centro_medico,telef_centro_medico,rif_centro_medico,usuario_registro,fecha_registro)  VALUES(
+  :estado, :municipio, :centro_medico, :telef, :rif, :usuario_registro, :fecha_registro
+);
+
+
+  CREATE TABLE estado
+(
+  id_estado integer NOT NULL,
+  abreviatura character varying(3),
+  cod_estado character varying(2) NOT NULL,
+  nombre character varying(40) NOT NULL,
+  id_pais integer NOT NULL,
+  CONSTRAINT estado_pkey PRIMARY KEY (id_estado),
+  CONSTRAINT "$1" FOREIGN KEY (id_pais)
+      REFERENCES public.pais (id_pais) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL
+)
+
+CREATE TABLE municipio
+(
+  id_municipio integer NOT NULL,
+  abreviatura character varying(3),
+  cod_municipio character varying(2) NOT NULL,
+  id_estado integer NOT NULL,
+  nombre character varying(40) NOT NULL,
+  CONSTRAINT municipio_pkey PRIMARY KEY (id_municipio),
+  CONSTRAINT "$1" FOREIGN KEY (id_estado)
+      REFERENCES public.estado (id_estado) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL
+)
+
+CREATE TABLE parroquia
+(
+  id_parroquia integer NOT NULL,
+  abreviatura character varying(3),
+  cod_parroquia character varying(2) NOT NULL,
+  id_municipio integer NOT NULL,
+  nombre character varying(40) NOT NULL,
+  CONSTRAINT parroquia_pkey PRIMARY KEY (id_parroquia),
+  CONSTRAINT "$1" FOREIGN KEY (id_municipio)
+      REFERENCES public.municipio (id_municipio) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL
+)

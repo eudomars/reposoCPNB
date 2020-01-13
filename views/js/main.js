@@ -68,6 +68,7 @@ $(function(){
 
 	// Registrar usuarios
 	$(document).on("submit", "#frm-reg-user", function(){
+		
 
 		$.ajax({
 			type: "post",
@@ -99,6 +100,108 @@ $(function(){
 		return false;
 
 	});
+
+	// Registrar medico
+	$(document).on("submit", "#formMedico", function(){
+		
+		console.log( $("#formMedico").serialize());
+			// if ($('#centroM').val()=="") {
+			// 	alertify.error("Ingrese el nombre de la clinica!");
+			// 	return false;
+			// }
+			 
+			alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
+				alertify.success('Procesar Registro!');
+				// alert('Excelente');
+				$.ajax({
+					type: "post",
+					url: "../controllers/ajaxController.php",
+					data: $("#formMedico").serialize(),
+					success: function (r) { console.log(r);
+		
+						switch (r) {
+							case '1':
+								alertify.success("Medico registrado correctamente");
+								// $("#frm-reg-user")[0].reset();
+								$("#formMedico")[0].reset();
+								// $("#reg-user-modal").modal('hide');
+								// list_users();
+								break;
+		
+							case '2':
+									alertify.warning("Formulario incompleto");
+									break;
+						
+							case "":
+								alertify.error("No se pudo registrar!");
+								$("#formMedico")[0].reset();
+								break;
+						}
+		
+					}
+				});
+			},function(){
+				alertify.error('Se Cancelo el Registro!');
+				
+			}).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
+
+		
+		
+
+		return false;
+
+	});
+
+	// Registrar Centro medico
+	$(document).on("submit", "#frm-reg-centroMedico", function(){
+		
+
+		if ($('#centroM').val()=="") {
+			alertify.error("Ingrese el nombre de la clinica!");
+			return false;
+		}
+		 
+		alertify.confirm('Registrar Centro Medico', '<br> <center> Esta Seguro de Registar Este Centro Medico?</c> ', function(){
+			alertify.success('Procesar Registro!');
+			// alert('Excelente');
+			$.ajax({
+				type: "post",
+				url: "../controllers/ajaxController.php",
+				data: $("#frm-reg-centroMedico").serialize(),
+				success: function (r) { console.log(r);
+	
+					switch (r) {
+						case '1':
+							alertify.success("Centro medico registrado correctamente");
+							// $("#frm-reg-user")[0].reset();
+							$("#frm-reg-centroMedico")[0].reset();
+							// $("#reg-user-modal").modal('hide');
+							// list_users();
+							break;
+	
+						case '2':
+								alertify.warning("Formulario incompleto");
+								break;
+					
+						case "":
+							alertify.error("No se pudo registrar!");
+							$("#frm-reg-centroMedico")[0].reset();
+							break;
+					}
+	
+				}
+			});
+		},function(){
+			alertify.error('Se Cancelo Registro!');
+			
+		}).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
+
+	
+	
+
+	return false;
+
+});
 
 	// Función de interacción de los botones en la vista myaccount
 	$(document).on('click', '#my_account_name', function(){
@@ -495,6 +598,49 @@ function trabBusc(){
 
 }
 
+//Cargamos el selec del municipio
+$(document).ready(function(){
+
+	mostrarMunicipio();
+
+	$('#estadoC').change(function () { 
+		mostrarMunicipio();
+		
+	});
+})
+ // enviamos el id del estado 
+function mostrarMunicipio(){
+
+	id_estado = $('#estadoC').val(),
+	// console.log(id_estado);
+	$.ajax({
+		type: "POST",
+		data: {estado:id_estado},
+		url: "../controllers/localidadController.php",
+		success:function(r){
+			// console.log(r);
+			$('#municipio').html(r);
+			
+		}
+	})
+
+
+}
+
+//Se guardara la informacion de centro medico
+
+function centroM() {
+	$.ajax({
+		type: "POST",
+		url: "../controllers/servicioController.php",
+		data: "data",
+		
+		success: function (response) {
+			
+		}
+	});
+}
+
 // Zoom trabajador
 function zoom_trab(id_trab){
 	
@@ -517,5 +663,8 @@ function zoom_trab(id_trab){
 	
 
 	});
+
+
+		
 
 }
