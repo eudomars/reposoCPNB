@@ -1,11 +1,18 @@
 <?php
-require_once '../core/mainModel.php';
 
-class reposo extends mainModel{
+if (is_file('../core/mainModel.php')) {
+    require_once '../core/mainModel.php';
+} else {
+    require_once 'core/mainModel.php';
+}
 
-    protected function lista_especialidad_modelo(){
+// require_once 'core/mainModel.php';
 
-        $sql = "SELECT idespecialidad, descripcion AS especialidad FROM especialidad";
+class reposoModel extends mainModel{
+
+    protected function lista_diagnostico_modelo(){
+
+        $sql = "SELECT iddiagnostico, diagnostico FROM diagnostico";
 
         $query = mainModel::conectar()->prepare($sql);
 

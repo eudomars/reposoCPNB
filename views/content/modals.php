@@ -176,8 +176,14 @@
                                 <label for="frm_rol">Diagnostico:</label>
                                 <select class="custom-select" name="medicoT" id="medicoT">
                                     <option value="">Seleccione...</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Analista</option>
+                                    <?php
+                                             require './controllers/reposoController.php';
+                                             $datos = reposoController::lista_diagnostico_controller();
+                                             
+                                             foreach ($datos as $key => $value) {?>
+                                                <option value="<?php echo $value['iddiagnostico'];?>"><?php echo $value['diagnostico'];?></option>
+                                            
+                                             <?php } ?>
                                 </select>
                             </div>
 
