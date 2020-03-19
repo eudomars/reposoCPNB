@@ -3,6 +3,7 @@
         Usuario: <?= $_SESSION['user']; ?>
     </div>
     <div class="card-body">
+        <!-- *********************** BOTON DE BUSCAR TRABAJADOR ****************************************************************** -->
         <div id="buscartrab">
 
             <h5 class="card-title">Consulta</h5>
@@ -10,9 +11,12 @@
             <button type="button" class="btn btn-light" onclick="trabBusc()">buscar</button>
 
         </div>
+        <!-- *********************** FIN DE BUSCAR TRABAJADOR ****************************************************************** -->
+
 
         <br>
         <br>
+        <!-- *********************** RESULTADO DE BUSCAR TRABAJADOR ****************************************************************** -->
 
         <div id="datosTrab">
 
@@ -77,19 +81,19 @@
                         <p id="correo"></p>
                     </div>
                 </div>
-
-                <div class="col-12">
+                
+                <div id="historia" class="col-12">
 
                     <p class="bg-info text-center fondo-bg"><strong>Historial de Reposo</strong></p>
 
                 </div>
                 <br>
 
-                <div class="col-sm-2">
-                    <p type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reg-reposo-modal">Registrar Reposo</p>
+                <div id="tableR" class="col-sm-2">
+                    <p type="button" class="btn btn-secondary"  id="reg-reposo-modal">Registrar Reposo</p>
                 </div>
-
-                <table class="table table-striped">
+            
+                <table id="tableRe" class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -168,8 +172,124 @@
             </div>
 
         </div>
+        <!-- *********************** RESULTADO DE BUSCAR TRABAJADOR ****************************************************************** -->
+
+        <!-- *********************** REGISTRAR REPOSO ****************************************************************** -->
+
+        <div id="form-reposo">
 
 
+            <form id="frm-reg-reposo" autocomplete="off">
+
+                <div class="row">
+                    <div class="col-12">
+                        <p class="bg-info text-center fondo-bg"><strong>Registrar Nuevo Reposo</strong></p>
+                    </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-md-12" id="midicos">
+                                    
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-md-12" id="Cenmedi">
+                                  
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <div class="col-sm-6">
+                    <div class="form-group">
+                                <div class="col-md-12">
+                                <label for="frm_rol">Diagnostico:</label>
+                                    <select class="custom-select" name="repoDiag" id="repoDiag">
+                                        <option value="">Seleccione...</option>
+                                        <?php
+
+                                require './controllers/reposoController.php';
+                                $datos = reposoController::lista_diagnostico_controller();
+
+
+                                foreach ($datos as $key => $value) { ?>
+
+
+                                    <option value="<?php echo $value['iddiagnostico']; ?>"><?php echo $value['diagnostico']; ?></option>
+
+                                <?php    }
+                                ?>
+                                        <option value="1">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        
+
+                        
+                        
+                       
+                    </div>
+
+                    <div class="col-sm-6">
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="frm_user">Desde:</label>
+                                <input type="date" class="form-control" name="desdeRep" id="desdeRep">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="frm_pass">Hasta: </label>
+
+                                <input type="date" class="form-control" name="hastaRep" id="hastaRep">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group col-sm-6">
+                        
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Observacion</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" name="repObserv"></textarea>
+                    </div>
+
+
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="frm_rol">Capture de reposo:</label>
+                        <div class="form-group">
+                            <input type="file" name="archivoRep" id="archivoRep">
+
+                        </div>
+
+                    </div>
+                    </div>
+
+                </div>
+
+
+
+                <hr>
+                <center>
+                    <button type="submit" class="btn btn-info">Guardar</button>
+                </center>
+
+
+            </form>
+
+        </div>
+        <!-- *********************** REGISTRAR REPOSO  ****************************************************************** -->
+
+     
 
 
     </div>
+</div>

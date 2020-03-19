@@ -18,6 +18,14 @@ class reposoController extends reposoModel
         return $datos;
     }
 
+    public function lista_medicos_controller()
+    {
+
+        $datos = reposoModel::lista_medicos_modelo();
+
+        return $datos;
+    }
+
     public function lista_municipio_controller($id_estado)
     {
 

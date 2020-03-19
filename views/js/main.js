@@ -1,7 +1,7 @@
 $(function(){
 
 	// Elementos ocultos
-	$("#my_account_save_name,#my_account_save_pass,#frmEditUser,#btn-editsave-user, #tableTrab").hide();
+	$("#my_account_save_name,#my_account_save_pass,#frmEditUser,#btn-editsave-user, #tableTrab, #form-reposo").hide();
 	
 	// Elementos bloqueados
 	$('#my_a_name,#my_a_pass,#my_a_pass_confirm,#my_a_pass_actual').attr('disabled', true);
@@ -21,6 +21,45 @@ $(function(){
 		return false;
 
 	});
+
+
+
+		
+
+	
+
+	
+
+// 	// mostrar modal de registro de centro medico
+// 	$(document).on("change","#CenmediT", function () {
+		
+	
+// 		$('#frm-reg-centroMedico').modal('show');
+		
+	
+// });
+
+	// ocultar el formulario del medico
+	$(document).on("click","#reg-reposo-modal", function () {
+		// alert("hola");
+		
+			$('#tableR').hide();
+			$('#tableRe').hide();
+			$('#historia').hide();
+			$('#form-reposo').show();
+		
+	});
+
+	$(document).on("click","#cerrarMedico", function () {
+		// alert("hola");
+			window.location = 'buscar';
+			$('#tableR').hide();
+			$('#tableRe').hide();
+			$('#historia').hide();
+			$('#form-reposo').show();
+		
+	});
+	
 
 	// Botón de editar usuario
 	$(document).on("click", "#btn-edit-user", function(){
@@ -100,15 +139,124 @@ $(function(){
 		return false;
 
 	});
+	
+		// mostrar modal de registro de medico y a su vez registrar el MEDICO
+		$(document).on("change","#mediT", function () {
+		
+			var modalMedico=$('#mediT').val();
+
+			if (modalMedico == 1) {
+		
+				$('#reg-medico-modal').modal('show');
+			
+			}
+		});
+		recargaMedico();
+
+			// mostrar modal de registro de medico y a su vez registrar el MEDICO
+			$(document).on("change","#CenmediT", function () {
+		
+				
+				var CMedico=$('#CenmediT').val();
+				// console.log(CMedico);
+	
+				if (CMedico == 1) {
+			
+					$('#reg-CentroMedico-modal').modal('show');
+					// alert("hola");
+				
+				}
+			});
+		recargaCMedico();
+	//Registrar reposo modal
+
+	$(document).on("submit", "#frm-reg-medico-modal", function(){
+		
+		
+		// console.log( $("#frm-reg-medico-modal").serialize());
+
+		alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
+			alertify.success('Procesando Registro!');
+			$.ajax({
+				type: "post",
+				url: "../controllers/ajaxController.php",
+				data: $("#frm-reg-medico-modal").serialize(),
+				success: function (r) { console.log(r);
+	
+					switch (r) {
+						case '1':
+							alertify.success("Medico registrado correctamente");
+							$("#frm-reg-medico-modal")[0].reset();
+							$('#reg-medico-modal').modal('hide');
+							recargaMedico();
+							break;
+						case '2':
+								alertify.warning("Formulario incompleto");
+								break;
+					
+						case "":
+							alertify.error("No se pudo registrar!");
+							break;
+					}	
+				}
+			});
+		},function(){
+			alertify.error('Se Cancelo el Registro!');
+			
+		}).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
+
+		
+		return false;
+		
+
+	});
+
+	// Registrar reposo
+	$(document).on("submit", "#frm-reg-reposo", function(){
+		
+		
+		console.log($("#frm-reg-reposo").serialize());
+
+		// alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
+		// 	alertify.success('Procesando Registro!');
+		// 	$.ajax({
+		// 		type: "post",
+		// 		url: "../controllers/ajaxController.php",
+		// 		data: $("#frm-reg-medico-modal").serialize(),
+		// 		success: function (r) { console.log(r);
+	
+		// 			switch (r) {
+		// 				case '1':
+		// 					alertify.success("Medico registrado correctamente");
+		// 					$("#frm-reg-medico-modal")[0].reset();
+		// 					$('#reg-medico-modal').modal('hide');
+		// 					recargaMedico();
+		// 					break;
+		// 				case '2':
+		// 						alertify.warning("Formulario incompleto");
+		// 						break;
+					
+		// 				case "":
+		// 					alertify.error("No se pudo registrar!");
+		// 					break;
+		// 			}	
+		// 		}
+		// 	});
+		// },function(){
+		// 	alertify.error('Se Cancelo el Registro!');
+			
+		// }).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
+
+		
+		// return false;
+		
+
+	});
 
 	// Registrar medico
 	$(document).on("submit", "#formMedico", function(){
 		
 		console.log( $("#formMedico").serialize());
-			// if ($('#centroM').val()=="") {
-			// 	alertify.error("Ingrese el nombre de la clinica!");
-			// 	return false;
-			// }
 			 
 			alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
 				alertify.success('Procesar Registro!');
@@ -122,10 +270,9 @@ $(function(){
 						switch (r) {
 							case '1':
 								alertify.success("Medico registrado correctamente");
-								// $("#frm-reg-user")[0].reset();
+								
 								$("#formMedico")[0].reset();
-								// $("#reg-user-modal").modal('hide');
-								// list_users();
+								
 								break;
 		
 							case '2':
@@ -134,7 +281,7 @@ $(function(){
 						
 							case "":
 								alertify.error("No se pudo registrar!");
-								$("#formMedico")[0].reset();
+								// $("#formMedico")[0].reset();
 								break;
 						}
 		
@@ -173,10 +320,8 @@ $(function(){
 					switch (r) {
 						case '1':
 							alertify.success("Centro medico registrado correctamente");
-							// $("#frm-reg-user")[0].reset();
+						
 							$("#frm-reg-centroMedico")[0].reset();
-							// $("#reg-user-modal").modal('hide');
-							// list_users();
 							break;
 	
 						case '2':
@@ -185,7 +330,7 @@ $(function(){
 					
 						case "":
 							alertify.error("No se pudo registrar!");
-							$("#frm-reg-centroMedico")[0].reset();
+							// $("#frm-reg-centroMedico")[0].reset();
 							break;
 					}
 	
@@ -555,7 +700,7 @@ function graficaHome(datosX1,datosY1,datosX2,datosY2){
 function trabBusc(){
 
 	ced = document.getElementById('trab').value;
-	// console.log(ced);
+	console.log(ced);
 	$.ajax({
 		type: "POST",
 		data: {cedula:ced},
@@ -663,8 +808,30 @@ function zoom_trab(id_trab){
 	
 
 	});
-
-
 		
 
 }
+	// recargar el selec del formulario de registro
+	function recargaMedico() {
+
+		$.get("../controllers/selectMedicoController.php", function (r){
+			// console.log(r);
+			
+			$('#midicos').html(r);
+		});
+	}
+
+	// recargar el selec del formulario de registro
+	function recargaCMedico() {
+
+		$.get("../controllers/selectCMedicoController.php", function (r){
+			// console.log(r);
+			
+			$('#Cenmedi').html(r);
+		});
+	}
+
+	// form-doctor
+	// function buscarDoctor(){
+	// 	$('#form-doctor').shadow();
+	// }

@@ -1,6 +1,5 @@
 <!-- Modal Zoom Users -->
-<div class="modal fade" id="zoom-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="zoom-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
         <div class="modal-content">
@@ -61,8 +60,7 @@
 </div>
 
 <!-- Modal Registrar Users -->
-<div class="modal fade" id="reg-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="reg-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -133,15 +131,14 @@
     </div>
 </div>
 
-<!-- Modal Registrar Reposo -->
-<div class="modal fade" id="reg-reposo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Modal Registrar medico -->
+<div class="modal fade" id="reg-medico-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
 
-                <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Reposo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Registrar nuevo medico</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -152,97 +149,179 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <form id="frm-reg-reposo" autocomplete="off">
-
-                            <div class="col-md-12">
-                                <label for="frm_rol">Medico Tratante:</label>
-                                <select class="custom-select" name="medicoT" id="medicoT">
-                                    <option value="">Seleccione...</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Analista</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="frm_rol">Centro medico:</label>
-                                <select class="custom-select" name="medicoT" id="medicoT">
-                                    <option value="">Seleccione...</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Analista</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="frm_rol">Diagnostico:</label>
-                                <select class="custom-select" name="medicoT" id="medicoT">
-                                    <option value="">Seleccione...</option>
-                                    <?php
-                                             require './controllers/reposoController.php';
-                                             $datos = reposoController::lista_diagnostico_controller();
-                                             
-                                             foreach ($datos as $key => $value) {?>
-                                                <option value="<?php echo $value['iddiagnostico'];?>"><?php echo $value['diagnostico'];?></option>
-                                            
-                                             <?php } ?>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="frm_rol">Tipo de reposo:</label>
-                                <select class="custom-select" name="medicoT" id="medicoT">
-                                    <option value="">Seleccione...</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Analista</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12">
-                                <br>
-                                <label for="frm_rol">Capture de reposo:</label>
-                                <div class="form-group"> 
-                                <input type="file" name="archivoRep" id="archivoRep">
-
-                                </div>
-                                
-                            </div>
-
-
+                        <form id="frm-reg-medico-modal" autocomplete="off">
                             <div class="row">
-
-                                <div class="col-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-
-                                        <label for="frm_user">Desde:</label>
-                                        <input type="date" class="form-control" name="centroM" id="centroM">
-
+                                        <div class="col-lg-12">
+                                            <label>Cedula del medico:</label><br>
+                                            <input type="text" name="cdMedicoModal" id="cdMedicoModal" class="form-control" maxlength="8">
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-6">
-
+                                <div class="col-md-8">
                                     <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label>Nombre y Apellido:</label><br>
+                                            <input type="text" name="nomApeMedicModal" id="nomApeMedicModal" class="form-control" placeholder="Ingrese el nombre y apellido del Medico">
+                                        </div>
+                                    </div>
+                                </div>
 
-                                        <label for="frm_pass">Hasta: </label>
-    
-                                        <input type="date" class="form-control" name="diag" id="diag">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label>Credencial:</label><br>
+                                            <input type="text" name="credencialMedModal" id="credencialMedModal" class="form-control" placeholder="Ingrese la credencial del Medico">
+                                        </div>
+                                    </div>
+                                </div>
 
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label>Telefono:</label><br>
+                                            <input type="text" name="telefMedModal" id="telefMedModal" maxlength="11" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label for="frm_rol">Especialidad:</label>
+                                            <select class="custom-select" name="especialidadModal" id="especialidadModal">
+                                                <option value="">Seleccione...</option>
+                                                <?php
+                                                require_once './controllers/localidadController.php';
+
+                                                $especialidad = localidadController::lista_especialidad_controller();
+
+                                                foreach ($especialidad as $key => $value) { ?>
+
+
+                                                    <option value="<?php echo $value['idespecialidad']; ?>"><?php echo $value['especialidad']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text">Observacion</span>
-  </div>
-  <textarea class="form-control" aria-label="With textarea" name="observ"></textarea>
-</div>
+
+
+
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
 
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Registrar centro medico -->
+<div class="modal fade" id="reg-CentroMedico-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Registrar nuevo centro medico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+
+                        <form id="frm-reg-centroMedico" autocomplete="off">
+                                <div class="row">
+
+                                    <!-- <div class="col-12">
+                                        <p class="bg-info text-center fondo-bg"><strong>Datos del Centro Medico</strong></p>
+                                    </div> -->
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="frm_rol">Estado:</label>
+                                                <select class="custom-select" name="estadoC" id="estadoC">
+                                                    <option value="">Seleccione...</option>
+                                                   
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="col-md-12" id="municipio">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <label>Centro Medico:</label><br>
+                                                <input type="text" name="centroM" id="centroM" class="form-control" placeholder="Ingrese el nombre del Centro Medico">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <label>Telefono:</label><br>
+                                                <input type="text" name="telefCent" id="telefCent" maxlength="11" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <label>Rif:</label><br>
+                                                <input type="text" name="rifCentroM" id="rifCentroM" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <label>Direccion:</label><br>
+                                                <textarea name="direcCM" id="direcCM" cols="40" rows="5" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                                
+                            <div class="modal-footer">
+                            <center>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                </center>
+                            </div>
+                            
                         </form>
 
                     </div>
