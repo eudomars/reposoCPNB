@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "reposo",
+            "dialect": "PostgreSQL",
+            "name": "localhost",
+            "password": "eudomars2004",
+            "port": 5432,
+            "server": "localhost",
+            "username": "postgres"
+        }
+    ]
+}

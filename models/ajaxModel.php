@@ -80,7 +80,7 @@ class ajaxModel extends mainModel{
         return $result_boolean;
 
     }
-
+    
      // Registrar medico
      protected function registrar_medico_modelo($datos){
 
@@ -117,7 +117,43 @@ class ajaxModel extends mainModel{
 
     }
 
+// Registrar medico modal
+protected function registrar_medico_modal_modelo($datosModal){
 
+    session_start(['name' => 'NSW']);
+
+    $sql = "INSERT INTO medico(cedula_medico,nombre_medico,credencial_medico,telef_medico,especialidad,usuario_registro,fecha_registro)  VALUES(
+        :cdMedico, :nomb, :credMedico, :telef, :espec, :user, :fecha
+      )";
+
+    $result = mainModel::conectar()->prepare($sql);
+    // mb_strtoupper($str)
+    
+    $result->bindValue(":cdMedico", $datosModal[0], PDO::PARAM_INT);
+    $result->bindValue(":nomb",ucwords($datosModal[1]), PDO::PARAM_STR);
+
+    $result->bindValue(":credMedico", $datosModal[2], PDO::PARAM_STR);
+    $result->bindValue(":telef", $datosModal[3], PDO::PARAM_STR);
+   
+
+    $result->bindValue(":espec",($datosModal[4]), PDO::PARAM_INT);
+
+    
+    $result->bindValue(":user", $_SESSION['id_user'], PDO::PARAM_INT);
+    $result->bindValue(":fecha", date("Y-m-d H:i:s"), PDO::PARAM_STR);
+    
+
+    $result->execute();
+    
+
+    $result_boolean = ($result->rowCount() > 0);
+
+    unset($result);
+    unset($conexion);
+
+    return $result_boolean;
+
+}
      // Registrar centro medico
      protected function registrar_centroMedico_modelo($datos){
 

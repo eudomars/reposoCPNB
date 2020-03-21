@@ -74,7 +74,7 @@
 
         <hr>
         <center>
-        <button  type="submit" class="btn btn-info">Guardar</button>
+         <button  type="submit" class="btn btn-info">Guardar</button>
         </center>
         </form>
     </div>
