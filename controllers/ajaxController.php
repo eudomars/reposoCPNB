@@ -102,6 +102,25 @@ class ajaxController extends ajaxModel
         return ajaxModel::registrar_centroMedico_modelo($centroMedico);
     }
 
+     // Registrar reposo
+     public function registrar_reposo_controlador($idTrab, $cedTrab, $idMedico, $idCent, $idDiag, $desde,$hasta,$observ)
+     {
+ 
+         $idTrab = mainModel::limpiar_cadena($idTrab);
+         $cedTrab = mainModel::limpiar_cadena($cedTrab);
+         $idMedico = mainModel::limpiar_cadena($idMedico);
+         $idCent = mainModel::limpiar_cadena($idCent);
+         $idDiag = mainModel::limpiar_cadena($idDiag);
+         $desde = mainModel::limpiar_cadena($desde);
+         $idCent = mainModel::limpiar_cadena($hasta);
+         $desde = mainModel::limpiar_cadena($observ);
+ 
+         $reposo = array("estado" => $idTrab, "municipio" => $cedTrab, "nombCentro" => $idMedico, "telf" => $idCent, "rif" => $idDiag, "ubicacion" => $desde, "telf" => $hasta, "ubicacion" => $observ);
+ 
+         return ajaxModel::registrar_reposo_modelo($reposo);
+     }
+ 
+
 
     // Actualizar contraseña
     public function actualizar_user_pass_controller($old_pass, $new_pass)
@@ -202,6 +221,19 @@ if (isset($_POST['cdMedico']) && isset($_POST['nomApeMedic']) && isset($_POST['c
         echo ajaxController::registrar_medico_controlador($_POST['cdMedico'], $_POST['nomApeMedic'], $_POST['credencialMed'], $_POST['telefMed'], $_POST['especialidad']);
     }
 }
+
+// Captura los datos del formulario del  medico para registrarlos
+// if (isset($_POST['cdMedico']) && isset($_POST['nomApeMedic']) && isset($_POST['credencialMed']) && isset($_POST['telefMed']) && isset($_POST['especialidad'])) {
+
+//     if (empty($_POST['cdMedico']) || empty($_POST['nomApeMedic']) || empty($_POST['credencialMed']) || empty($_POST['telefMed']) || empty($_POST['especialidad'])) {
+
+//         echo 2; // Formulario incompleto
+
+//     } else {
+
+//         echo ajaxController::registrar_medico_controlador($_POST['cdMedico'], $_POST['nomApeMedic'], $_POST['credencialMed'], $_POST['telefMed'], $_POST['especialidad']);
+//     }
+// }
 
 // Captura los datos del formulario del  medico de un modal para registrarlos 
 if (

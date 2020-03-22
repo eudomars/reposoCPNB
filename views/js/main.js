@@ -212,17 +212,64 @@ $(function(){
 	});
 
 	// Registrar reposo
-	$(document).on("submit", "#frm-reg-reposo", function(){
-		
-		
-		console.log($("#frm-reg-reposo").serialize());
+	$(document).on("submit", "#frm-reg-repos", function(){
+		var trabajador = $("#cd").val();
+		var cedul = $("#cd").val();
+		var centroM = $("#CenmediT").val();
+		var medico = $("#mediT").val();
+		var diagnostico = $("#repoDiag").val();
+		var desde = $("#desdeRep").val();
+		var hasta = $("#hastaRep").val();
+		var observasion = $("#repObserva").val();
+		var archivoRep = $("#archivoRepo").val();
 
-		// alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
+		var date_1 = new Date(desde);
+		var date_2 = new Date(hasta);
+
+		var day_as_milliseconds = 86400000;
+		var diff_in_millisenconds = date_2 - date_1;
+		var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+
+		console.log( diff_in_days );
+		if (diff_in_days > 3) {
+			console.log("Debes ingrese la fecha de convalidacion");
+			console.log(cedul);
+		}
+
+		// VALIDAMOS CON UN IF SI LOS CAMPOS DEL FORMULARIOS NO ESTAN VACIOS
+		if ((centroM && medico && diagnostico && desde && hasta && observasion).length > 0) {
+			// alertify.success('Formulario incompleto!');
+		// 	console.log(centroM);
+		// console.log(medico);
+		// console.log(diagnostico);
+		// console.log(desde);
+		// console.log(hasta);
+		// console.log(observasion);
+		// console.log(archivoRep);
+
+		
+	
+
+		
+		var datos = {
+			"cemtroM" : centroM,
+			"medico" : medico,
+			// "idtrabajador" : trabajador,
+			"cedula" : cedul,
+			"diagnostico" : diagnostico,
+			"desde" : desde,
+			"hasta" : hasta,
+			"dias" : diff_in_days,
+			"observasion" : observasion,
+			"archivoRep" : archivoRep
+		};
+		console.log(datos);
+		// 	alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
 		// 	alertify.success('Procesando Registro!');
 		// 	$.ajax({
 		// 		type: "post",
 		// 		url: "../controllers/ajaxController.php",
-		// 		data: $("#frm-reg-medico-modal").serialize(),
+		// 		data: datos,
 		// 		success: function (r) { console.log(r);
 	
 		// 			switch (r) {
@@ -247,8 +294,14 @@ $(function(){
 			
 		// }).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
 
+		} else {
+			
+		alertify.success('Formulario incompleto!');
+		}
 		
-		// return false;
+
+		
+		return false;
 		
 
 	});
@@ -700,7 +753,7 @@ function graficaHome(datosX1,datosY1,datosX2,datosY2){
 function trabBusc(){
 
 	ced = document.getElementById('trab').value;
-	console.log(ced);
+	// console.log(ced);
 	$.ajax({
 		type: "POST",
 		data: {cedula:ced},

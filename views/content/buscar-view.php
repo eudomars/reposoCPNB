@@ -179,7 +179,7 @@
         <div id="form-reposo">
 
 
-            <form id="frm-reg-reposo" autocomplete="off">
+            <form id="frm-reg-repos" autocomplete="off">
 
                 <div class="row">
                     <div class="col-12">
@@ -258,7 +258,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Observacion</span>
                         </div>
-                        <textarea class="form-control" aria-label="With textarea" name="repObserv"></textarea>
+                        <textarea class="form-control" aria-label="With textarea" name="repObserva" id="repObserva"></textarea>
                     </div>
 
 
@@ -266,7 +266,7 @@
                     <div class="form-group">
                         <label for="frm_rol">Capture de reposo:</label>
                         <div class="form-group">
-                            <input type="file" name="archivoRep" id="archivoRep">
+                            <input type="file" name="archivoRep" id="archivoRepo">
 
                         </div>
 
