@@ -211,6 +211,8 @@ $(function(){
 
 	});
 
+	
+
 	// Registrar reposo
 	$(document).on("submit", "#frm-reg-repos", function(){
 		var trabajador = $("#cd").val();
@@ -222,14 +224,13 @@ $(function(){
 		var hasta = $("#hastaRep").val();
 		var observasion = $("#repObserva").val();
 		var archivoRep = $("#archivoRepo").val();
-
+		
 		var date_1 = new Date(desde);
 		var date_2 = new Date(hasta);
 
 		var day_as_milliseconds = 86400000;
 		var diff_in_millisenconds = date_2 - date_1;
 		var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
-
 		console.log( diff_in_days );
 		if (diff_in_days > 3) {
 			console.log("Debes ingrese la fecha de convalidacion");
@@ -762,6 +763,7 @@ function trabBusc(){
 			r = JSON.parse(r);
 			// console.log(r.cedula);
 			// $('#tableTrab').show();
+			$('#rep').html(r.id_trabajador);
 			$('#cd').html(r.cedula);
 			$('#nomb').html(r.nombres);
 			$('#jer').html(r.cargo);

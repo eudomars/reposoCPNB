@@ -25,6 +25,12 @@
                 <div class="col-12">
                     <p class="bg-info text-center fondo-bg"><strong>Datos Personales</strong></p>
                 </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>idtrabajador</label>
+                        <p id="idt"></p>
+                    </div>
+                </div>
 
                 <div class="col-sm-2">
                     <div class="form-group">
@@ -179,7 +185,7 @@
         <div id="form-reposo">
 
 
-            <form id="frm-reg-repos" autocomplete="off">
+            <form id="frm-reg-repos" method="POST" enctype="multipart/form-data" autocomplete="off">
 
                 <div class="row">
                     <div class="col-12">
@@ -195,7 +201,7 @@
                             </div>
                         </div>
 
-                    
+                        <p id="rep"></p>
 
                         <div class="col-sm-6">
                             <div class="form-group">
