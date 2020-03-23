@@ -103,6 +103,9 @@ class ajaxController extends ajaxModel
     }
 
 
+ 
+
+
     // Actualizar contraseña
     public function actualizar_user_pass_controller($old_pass, $new_pass)
     {
@@ -202,7 +205,6 @@ if (isset($_POST['cdMedico']) && isset($_POST['nomApeMedic']) && isset($_POST['c
         echo ajaxController::registrar_medico_controlador($_POST['cdMedico'], $_POST['nomApeMedic'], $_POST['credencialMed'], $_POST['telefMed'], $_POST['especialidad']);
     }
 }
-
 // Captura los datos del formulario del  medico de un modal para registrarlos 
 if (
     isset($_POST['cdMedicoModal']) && 

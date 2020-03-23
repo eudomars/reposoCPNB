@@ -36,3 +36,5 @@ class selectCMedicoController extends reposoModel
 }
 
 echo selectCMedicoController::lista_selectCMedicos_controller();
+
+
