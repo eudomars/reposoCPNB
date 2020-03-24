@@ -10,7 +10,7 @@ if (is_file('../models/reposoModel.php')) {
 class registroReposoController extends reposoModel
 {
       // Registrar reposo
-      public function registrar_reposo_controlador($idTrab, $cedTrab, $idMedico, $idCent, $idDiag, $desde,$hasta,$observ)
+      public function registrar_reposo_controlador($idTrab, $cedTrab, $idMedico, $idCent, $idDiag, $desde,$hasta,$dias,$observ)
       {
   
           $idTrab = mainModel::limpiar_cadena($idTrab);
@@ -20,11 +20,13 @@ class registroReposoController extends reposoModel
           $idDiag = mainModel::limpiar_cadena($idDiag);
           $desde = mainModel::limpiar_cadena($desde);
           $idCent = mainModel::limpiar_cadena($hasta);
-          $desde = mainModel::limpiar_cadena($observ);
+          $dias = mainModel::limpiar_cadena($dias);
+          $$observ = mainModel::limpiar_cadena($observ);
+        //   $archiv = mainModel::limpiar_cadena($archiv);
   
-          $reposo = array("estado" => $idTrab, "municipio" => $cedTrab, "nombCentro" => $idMedico, "telf" => $idCent, "rif" => $idDiag, "ubicacion" => $desde, "telf" => $hasta, "ubicacion" => $observ);
+          $reposo = array("idtrabajador" => $idTrab, "cedula" => $cedTrab, "medico" => $idMedico, "cemtroM" => $idCent, "diagnostico" => $idDiag, "desde" => $desde, "hasta" => $hasta, "dias" =>$dias, "ubicacion" => $observ);
   
-          return ajaxModel::registrar_reposo_modelo($reposo);
+          return reposoModel::registrar_reposo_modelo($reposo);
       }
 
     public function lista_diagnostico_controller()
@@ -90,15 +92,16 @@ if (isset($_POST['estado'])) {
 
 
 // Captura los datos del formulario del  medico para registrarlos
-// if (isset($_POST['cdMedico']) && isset($_POST['nomApeMedic']) && isset($_POST['credencialMed']) && isset($_POST['telefMed']) && isset($_POST['especialidad'])) {
 
-//     if (empty($_POST['cdMedico']) || empty($_POST['nomApeMedic']) || empty($_POST['credencialMed']) || empty($_POST['telefMed']) || empty($_POST['especialidad'])) {
+if (isset($_POST['idtrabajador']) && isset($_POST['cedula']) && isset($_POST['medico']) && isset($_POST['cemtroM']) && isset($_POST['diagnostico']) && isset($_POST['desde']) && isset($_POST['hasta']) && isset($_POST['dias']) && isset($_POST['observasion'])) {
 
-//         echo 2; // Formulario incompleto
+    if (empty($_POST['idtrabajador']) || empty($_POST['cedula']) || empty($_POST['medico']) || empty($_POST['cemtroM']) || empty($_POST['diagnostico']) || empty($_POST['desde']) || empty($_POST['hasta']) || empty($_POST['dias']) || empty($_POST['observasion'])) {
 
-//     } else {
+        echo 2; // Formulario incompleto
 
-//         echo ajaxController::registrar_medico_controlador($_POST['cdMedico'], $_POST['nomApeMedic'], $_POST['credencialMed'], $_POST['telefMed'], $_POST['especialidad']);
-//     }
-// }
+    } else {
+
+        echo registroReposoController::registrar_reposo_controlador($_POST['idtrabajador'], $_POST['cedula'], $_POST['medico'], $_POST['cemtroM'], $_POST['diagnostico'],$_POST['desde'], $_POST['hasta'], $_POST['dias'], $_POST['observasion']);
+    }
+}
 

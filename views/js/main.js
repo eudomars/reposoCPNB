@@ -215,8 +215,8 @@ $(function(){
 
 	// Registrar reposo
 	$(document).on("submit", "#frm-reg-repos", function(){
-		var trabajador = $("#cd").val();
-		var cedul = $("#cd").val();
+		var trabajador = $("#idtrabajador").val();
+		var cedul = $("#cedulaTrab").val();
 		var centroM = $("#CenmediT").val();
 		var medico = $("#mediT").val();
 		var diagnostico = $("#repoDiag").val();
@@ -238,7 +238,7 @@ $(function(){
 		}
 
 		// VALIDAMOS CON UN IF SI LOS CAMPOS DEL FORMULARIOS NO ESTAN VACIOS
-		if ((centroM && medico && diagnostico && desde && hasta && observasion).length > 0) {
+		// if ((centroM && medico && diagnostico && desde && hasta && observasion).length > 0) {
 			// alertify.success('Formulario incompleto!');
 		// 	console.log(centroM);
 		// console.log(medico);
@@ -253,10 +253,10 @@ $(function(){
 
 		
 		var datos = {
-			"cemtroM" : centroM,
-			"medico" : medico,
-			// "idtrabajador" : trabajador,
+			"idtrabajador" : trabajador,
 			"cedula" : cedul,
+			"medico" : medico,
+			"cemtroM" : centroM,
 			"diagnostico" : diagnostico,
 			"desde" : desde,
 			"hasta" : hasta,
@@ -265,40 +265,40 @@ $(function(){
 			"archivoRep" : archivoRep
 		};
 		console.log(datos);
-		// 	alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
-		// 	alertify.success('Procesando Registro!');
-		// 	$.ajax({
-		// 		type: "post",
-		// 		url: "../controllers/ajaxController.php",
-		// 		data: datos,
-		// 		success: function (r) { console.log(r);
+			alertify.confirm('Registrar Medico', '<br> <center> Esta Seguro de Registar Este Medico?</c> ', function(){
+			alertify.success('Procesando Registro!');
+			$.ajax({
+				type: "post",
+				url: "../controllers/ajaxController.php",
+				data: datos,
+				success: function (r) { console.log(r);
 	
-		// 			switch (r) {
-		// 				case '1':
-		// 					alertify.success("Medico registrado correctamente");
-		// 					$("#frm-reg-medico-modal")[0].reset();
-		// 					$('#reg-medico-modal').modal('hide');
-		// 					recargaMedico();
-		// 					break;
-		// 				case '2':
-		// 						alertify.warning("Formulario incompleto");
-		// 						break;
+					switch (r) {
+						case '1':
+							alertify.success("Medico registrado correctamente");
+							// $("#frm-reg-medico-modal")[0].reset();
+							// $('#reg-medico-modal').modal('hide');
+							// recargaMedico();
+							break;
+						case '2':
+								alertify.warning("Formulario incompleto");
+								break;
 					
-		// 				case "":
-		// 					alertify.error("No se pudo registrar!");
-		// 					break;
-		// 			}	
-		// 		}
-		// 	});
-		// },function(){
-		// 	alertify.error('Se Cancelo el Registro!');
+						case "":
+							alertify.error("No se pudo registrar!");
+							break;
+					}	
+				}
+			});
+		},function(){
+			alertify.error('Se Cancelo el Registro!');
 			
-		// }).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
+		}).set({labels:{ok:'Si', cancel: 'Cancelar'}, padding: false});
 
-		} else {
+		// } else {
 			
-		alertify.success('Formulario incompleto!');
-		}
+		// alertify.success('Formulario incompleto!');
+		// }
 		
 
 		
@@ -763,7 +763,8 @@ function trabBusc(){
 			r = JSON.parse(r);
 			// console.log(r.cedula);
 			// $('#tableTrab').show();
-			$('#rep').html(r.id_trabajador);
+			$('#idtrabajador').val(r.id_trabajador);
+			$('#cedulaTrab').val(r.cedula);
 			$('#cd').html(r.cedula);
 			$('#nomb').html(r.nombres);
 			$('#jer').html(r.cargo);

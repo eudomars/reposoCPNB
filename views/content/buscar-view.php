@@ -25,12 +25,12 @@
                 <div class="col-12">
                     <p class="bg-info text-center fondo-bg"><strong>Datos Personales</strong></p>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <div class="form-group">
                         <label>idtrabajador</label>
                         <p id="idt"></p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-sm-2">
                     <div class="form-group">
@@ -191,7 +191,8 @@
                     <div class="col-12">
                         <p class="bg-info text-center fondo-bg"><strong>Registrar Nuevo Reposo</strong></p>
                     </div>
-
+                        <input type="hidden" name="idtrabajador" id="idtrabajador">
+                        <input type="hidden" name="cedulaTrab" id="cedulaTrab">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="col-md-12" id="midicos">
